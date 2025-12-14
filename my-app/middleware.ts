@@ -1,6 +1,6 @@
 import { jwtVerify } from "jose";
 import { NextRequest, NextResponse } from "next/server";
-
+import ValidateJwtToken from "./app/handlers/validate_jwt";
 export default async function middleware(req: NextRequest) {
     const token = req.cookies.get('token')?.value;
     
@@ -10,10 +10,10 @@ export default async function middleware(req: NextRequest) {
     }
 
     try {
-        const secret: any = process.env.NEXT_JWT_SECRET_KEY;
-        const key = new TextEncoder().encode(secret);
-        const res = await jwtVerify(token, key);
-        if (res) {
+
+        const validate = await ValidateJwtToken(token);
+        
+        if (validate) {
             return NextResponse.next();
         } else {
             return NextResponse.redirect(new URL('/login', req.url));
