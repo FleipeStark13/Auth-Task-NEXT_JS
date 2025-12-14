@@ -47,7 +47,6 @@ export default function Header() {
     return (
         <header className="header flex items-center justify-between p-2">
             <h1>Next Todo App</h1>
-            {load ? <p>Carregando</p> : <></>}
             <nav>
                 <ul className="p-0 flex gap-5">
                     <li className="bg-zinc-900 p-2 rounded-md hover:bg-zinc-600">
